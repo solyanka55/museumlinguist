@@ -1,0 +1,91 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <script type="importmap">
+            {
+                "imports": {
+                    "@google/model-viewer": "https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.js"
+                }
+            }
+        </script>
+        <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Музей туризма</title>
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <header class="container">
+                <span class="logo">
+                    <img src="img/logo3.png" alt="">
+                </span>
+                <nav>
+                    <ul>
+                        <li><a href="#">Главная</a></li>
+                        <li class="active"><a href="#">Наши экспонаты</a>
+                            <ul class="dropdown">
+                                <li><a href="amphora.html">Амфора античная</a></li>
+                                <li><a href="#1">Зонтик</a></li>
+                                <li><a href="drum.html">Барабан пионерский</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Новости</a></li>
+                        <li><a href="#">История школы</a></li>
+                        <li class="btn"><a href="#">Контакты</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <div class="hero">
+                <div class="hero--info">
+                    <h2>Музей туризма "Лингвист"</h2>
+                    <h1>Зонтик<span class="date"></span></h1>
+                    <p>Происхождение: Северное Причерноморье, античные государства Крыма (возможно, Херсонес, Пантикапей или другие центры).</p>
+                </div>
+                <img src="img/ampho.png" alt="" class="amphora">
+            </div>
+            
+            <section class="description" style="background-color: #eee7d7;">
+                <h2 style="text-align: left; margin-bottom: 20px; margin-top: -50px; color: #324961;">Амфора 3D</h2>
+                <div class="model_3D" style="height: 700px;">
+                    <model-viewer 
+                        src="amphora.glb" 
+                        style="width:50%; height:500px; "
+                        auto-rotate
+                        auto-rotate-delay="0"
+                        rotation-per-second="15deg"
+                        camera-controls
+                        touch-action="pan-y"
+                        interaction-prompt="auto"
+                        exposure="1"
+                        shadow-intensity="0.5">
+                        <div class="progress-bar hide" slot="progress-bar">
+                            <div class="update-bar"></div>
+                        </div>
+                    </model-viewer>
+                </div>
+                <div class="photos"style="margin-top: -140px">
+                        <h2>Фото музея</h2>
+                        <div class="exhibits-grid">
+                            <div class="exhibit-card">
+                                <img src="img/img1.jpg" alt="">
+                                <h3>Скифский меч</h3>
+                                <p>VII в. до н.э.</p>
+                            </div>
+                            <div class="exhibit-card">
+                                <img src="img/img2.jpg" alt="">
+                                <h3>Греческая монета</h3>
+                                <p>IV в. до н.э.</p>
+                            </div>
+                            <div class="exhibit-card">
+                                <img src="img/img3.jpg" alt="">
+                                <h3>Керамическая лампада</h3>
+                                <p>III в. до н.э.</p>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </body>
+    </html>

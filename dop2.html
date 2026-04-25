@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Амфора «Поход Геракла» | Музей туризма Школы №1</title>
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 3D Model Viewer -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <!-- Lightbox для галереи -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FDF8E7;
+            color: #2D2D2D;
+            line-height: 1.5;
+        }
+        
+        /* Шапка */
+        .header {
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 28px;
+            color: #E67E22;
+        }
+        
+        .logo span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+        }
+        
+        .logo small {
+            font-size: 12px;
+            color: #666;
+            margin-left: 6px;
+        }
+        
+        .back-link a {
+            color: #E67E22;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Герой-блок */
+        .hero {
+            background: linear-gradient(135deg, #1E3A1F 0%, #2C5F2D 100%);
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+        
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .tag {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .qr-code p {
+            color: #2D2D2D;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            padding: 48px 0;
+        }
+        
+        /* 3D модель */
+        .model-section {
+            background: #1a1a1a;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 48px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        model-viewer {
+            width: 100%;
+            height: 500px;
+            background: #1a1a1a;
+        }
+        
+        .model-caption {
+            background: #2D2D2D;
+            color: #ccc;
+            padding: 12px 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .model-caption i {
+            margin-right: 8px;
+        }
+        
+        /* Сетка контента */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+        
+        /* Информационная карточка */
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .info-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid #E67E22;
+            padding-left: 16px;
+        }
+        
+        .info-row {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-label {
+            width: 100px;
+            font-weight: 600;
+            color: #E67E22;
+        }
+        
+        .info-value {
+            flex: 1;
+            color: #2D2D2D;
+        }
+        
+        .description {
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        
+        /* Галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+        
+        /* Аудиогид */
+        .audio-player {
+            background: #F5F0E0;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .audio-player audio {
+            width: 100%;
+            margin-top: 12px;
+        }
+        
+        /* Интерактивные точки (hotspots) */
+        .hotspots-section {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 48px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .hotspots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .hotspot-card {
+            background: #FDF8E7;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #E0D6C0;
+        }
+        
+        .hotspot-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #E67E22;
+        }
+        
+        .hotspot-card i {
+            font-size: 28px;
+            color: #E67E22;
+            margin-bottom: 10px;
+        }
+        
+        .hotspot-card h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .hotspot-card p {
+            font-size: 13px;
+            color: #666;
+            display: none;
+        }
+        
+        .hotspot-card.active {
+            background: #E67E22;
+            color: white;
+            border-color: #E67E22;
+        }
+        
+        .hotspot-card.active i,
+        .hotspot-card.active p {
+            color: white;
+        }
+        
+        .hotspot-card.active p {
+            display: block;
+        }
+        
+        /* Таймлайн */
+        .timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 48px;
+        }
+        
+        .timeline-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 24px;
+            position: relative;
+        }
+        
+        .timeline-steps::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: #E0D6C0;
+            z-index: 0;
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background: white;
+            padding: 0 8px;
+        }
+        
+        .step-year {
+            width: 60px;
+            height: 60px;
+            background: #E67E22;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 12px;
+            font-size: 14px;
+        }
+        
+        .step-text {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-steps::before {
+                display: none;
+            }
+            .step {
+                margin-bottom: 20px;
+            }
+        }
+        
+        /* Футер */
+        .footer {
+            background: #2D2D2D;
+            color: #ccc;
+            padding: 40px 0;
+            margin-top: 48px;
+        }
+        
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        
+        .footer a {
+            color: #E67E22;
+            text-decoration: none;
+        }
+        
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #E67E22;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #D35400;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            model-viewer {
+                height: 350px;
+            }
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-tags {
+                justify-content: center;
+            }
+            .qr-code {
+                display: inline-block;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка -->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-mountain"></i>
+            <span>Музей туризма <small>Школа №1</small></span>
+        </div>
+        <div class="back-link">
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i> Вернуться в музей
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Герой-блок с названием и QR -->
+<section class="hero">
+    <div class="container">
+        <div>
+            <h1>🏺 Амфора «Поход Геракла»</h1>
+            <p>Древнегреческий сосуд, который рассказывает о путешествиях и подвигах</p>
+            <div class="hero-tags">
+                <span class="tag"><i class="fas fa-calendar"></i> V век до н.э.</span>
+                <span class="tag"><i class="fas fa-map-marker-alt"></i> Причерноморье</span>
+                <span class="tag"><i class="fas fa-user"></i> Принес: ученики 10А, 2024</span>
+            </div>
+        </div>
+        <div class="qr-code" id="qrContainer">
+            <div id="qrCode"></div>
+            <p><i class="fas fa-qrcode"></i> Наведи камеру телефона</p>
+        </div>
+    </div>
+</section>
+
+<!-- Основной контент -->
+<main class="main-content">
+    <div class="container">
+        
+        <!-- 3D МОДЕЛЬ -->
+        <div class="model-section">
+            <model-viewer 
+                src="https://raw.githubusercontent.com/google/model-viewer/master/packages/model-viewer/test/samples/Assets/Astronaut.glb"
+                alt="3D-модель амфоры"
+                auto-rotate
+                auto-rotate-delay="0"
+                rotation-per-second="15deg"
+                camera-controls
+                touch-action="pan-y"
+                interaction-prompt="auto"
+                exposure="1"
+                shadow-intensity="1"
+                style="width:100%; height:500px;">
+                <div class="progress-bar hide" slot="progress-bar">
+                    <div class="update-bar"></div>
+                </div>
+                <button slot="ar-button" class="btn btn-primary">
+                    <i class="fas fa-cube"></i> Посмотреть в AR
+                </button>
+            </model-viewer>
+            <div class="model-caption">
+                <span><i class="fas fa-hand-pointer"></i> Вращай мышкой или пальцем</span>
+                <span><i class="fas fa-search-plus"></i> Приблизь, чтобы рассмотреть детали</span>
+                <span><i class="fas fa-arrows-alt"></i> Нажми правой кнопкой для полного экрана</span>
+            </div>
+        </div>
+        
+        <!-- Сетка: информация + галерея -->
+        <div class="content-grid">
+            <!-- Левая колонка: характеристики -->
+            <div class="info-card">
+                <h2><i class="fas fa-info-circle"></i> Об экспонате</h2>
+                <div class="info-row">
+                    <div class="info-label">Название</div>
+                    <div class="info-value">Амфора чернофигурная «Геракл и Немейский лев»</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Датировка</div>
+                    <div class="info-value">ок. 480 г. до н.э., Аттика</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Материал</div>
+                    <div class="info-value">Глина, черный лак, ангоб</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Размеры</div>
+                    <div class="info-value">Высота 42 см, диаметр горловины 18 см</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Место находки</div>
+                    <div class="info-value">Раскопки в районе г. Анапа, 2023 г.</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">В музее с</div>
+                    <div class="info-value">Сентябрь 2024 года</div>
+                </div>
+                <div class="description">
+                    <p><strong>История экспоната:</strong> Эта амфора была найдена во время летней археологической практики учеников 10А класса в Краснодарском крае. Сосуд использовался для хранения вина и масла, а роспись рассказывает об одном из подвигов Геракла — победе над Немейским львом.</p>
+                    <p style="margin-top: 12px;"><strong>Почему она в музее туризма?</strong> Амфора символизирует путешествия древних греков по Черному морю, торговые пути и культурный обмен. Как и наши школьные походы, она рассказывает о пути и приключениях.</p>
+                </div>
+            </div>
+            
+            <!-- Правая колонка: галерея деталей -->
+            <div class="info-card">
+                <h2><i class="fas fa-camera"></i> Детали и роспись</h2>
+                <div class="gallery">
+                    <a href="https://via.placeholder.com/800x600?text=Амфора+общий+вид" data-lightbox="gallery" data-title="Общий вид амфоры">
+                        <div class="gallery-item">
+                            <img src="https://via.placeholder.com/400x300?text=Амфора" alt="Амфора общий вид">
+                            <div class="gallery-caption">Общий вид</div>
+                        </div>
+                    </a>
+                    <a href="https://via.placeholder.com/800x600?text=Роспись+Геракл" data-lightbox="gallery" data-title="Роспись: Геракл сражается со львом">
+                        <div class="gallery-item">
+                            <img src="https://via.placeholder.com/400x300?text=Роспись" alt="Роспись">
+                            <div class="gallery-caption">Геракл и лев</div>
+                        </div>
+                    </a>
+                    <a href="https://via.placeholder.com/800x600?text=Горловина+амфоры" data-lightbox="gallery" data-title="Горловина и ручки">
+                        <div class="gallery-item">
+                            <img src="https://via.placeholder.com/400x300?text=Горловина" alt="Горловина">
+                            <div class="gallery-caption">Горловина и ручки</div>
+                        </div>
+                    </a>
+                    <a href="https://via.placeholder.com/800x600?text=Клеймо+гончара" data-lightbox="gallery" data-title="Клеймо гончара на дне">
+                        <div class="gallery-item">
+                            <img src="https://via.placeholder.com/400x300?text=Клеймо" alt="Клеймо">
+                            <div class="gallery-caption">Клеймо мастера</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Аудиогид -->
+                <div class="audio-player">
+                    <i class="fas fa-headphones" style="color: #E67E22; margin-right: 8px;"></i>
+                    <strong>Аудиогид (3 минуты)</strong>
+                    <audio controls>
+                        <source src="#" type="audio/mpeg">
+                        Ваш браузер не поддерживает аудио. Текст: «Эта амфора была создана в Афинах в V веке до н.э...»
+                    </audio>
+                    <p style="font-size: 12px; margin-top: 8px; color: #666;">
+                        <i class="fas fa-microphone-alt"></i> Рассказывает учитель истории И.А. Петрова
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ИНТЕРАКТИВНЫЕ ТОЧКИ (HOTSPOTS) -->
+        <div class="hotspots-section">
+            <h2><i class="fas fa-map-pin"></i> Интерактивные детали</h2>
+            <p>Нажми на любую деталь, чтобы узнать о ней подробнее</p>
+            <div class="hotspots-grid" id="hotspotsGrid">
+                <div class="hotspot-card" data-detail="body">
+                    <i class="fas fa-palette"></i>
+                    <h4>Роспись «Геракл и лев»</h4>
+                    <p>Геракл изображен в момент борьбы с Немейским львом. Это первый из 12 подвигов героя. Шкура льва впоследствии стала его непробиваемой защитой.</p>
+                </div>
+                <div class="hotspot-card" data-detail="handles">
+                    <i class="fas fa-hand-peace"></i>
+                    <h4>Ручки-волютоны</h4>
+                    <p>Изогнутые ручки характерны для амфор. Они удобны для переноски, а форма «волюта» (завиток) — типичный аттический стиль V века.</p>
+                </div>
+                <div class="hotspot-card" data-detail="neck">
+                    <i class="fas fa-circle"></i>
+                    <h4>Горловина и венчик</h4>
+                    <p>Широкая горловина позволяла использовать амфору как для хранения жидкостей, так и для сыпучих продуктов. Край укреплен для прочности.</p>
+                </div>
+                <div class="hotspot-card" data-detail="bottom">
+                    <i class="fas fa-stamp"></i>
+                    <h4>Клеймо на дне</h4>
+                    <p>На дне сохранилось клеймо гончара — знак, по которому ученые определили мастерскую в Афинах. Такие клейма помогали отслеживать качество.</p>
+                </div>
+            </div>
+            <div id="hotspotDetail" style="margin-top: 20px; padding: 16px; background: #F5F0E0; border-radius: 12px; display: none;">
+                <!-- Сюда будет подгружаться детальная информация -->
+            </div>
+        </div>
+        
+        <!-- ТАЙМЛАЙН: путь амфоры -->
+        <div class="timeline">
+            <h2><i class="fas fa-timeline"></i> Путешествие амфоры во времени</h2>
+            <div class="timeline-steps">
+                <div class="step">
+                    <div class="step-year">480 г. до н.э.</div>
+                    <div class="step-text">Создана в Афинах</div>
+                </div>
+                <div class="step">
+                    <div class="step-year">V–III вв. до н.э.</div>
+                    <div class="step-text">Путешествие по Черному морю с вином</div>
+                </div>
+                <div class="step">
+                    <div class="step-year">2023 г.</div>
+                    <div class="step-text">Найдена школьной экспедицией</div>
+                </div>
+                <div class="step">
+                    <div class="step-year">2024 г.</div>
+                    <div class="step-text">Реставрация и передача в музей</div>
+                </div>
+                <div class="step">
+                    <div class="step-year">Сегодня</div>
+                    <div class="step-text">Экспонируется в нашем музее</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Интерактивный вопрос для школьников -->
+        <div class="info-card" style="text-align: center; background: linear-gradient(135deg, #E67E22, #D35400); color: white;">
+            <i class="fas fa-question-circle" style="font-size: 32px; margin-bottom: 12px;"></i>
+            <h3 style="color: white;">А знаешь ли ты?</h3>
+            <p>Сколько литров вина могла вместить такая амфора?</p>
+            <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;">
+                <span class="tag" style="background: rgba(255,255,255,0.2); cursor: pointer;" onclick="alert('Попробуй еще раз! 👀')">5 литров</span>
+                <span class="tag" style="background: rgba(255,255,255,0.2); cursor: pointer;" onclick="alert('Правильно! 🎉 Такая амфора вмещала 10–12 литров. Этого хватало, чтобы напоить 30 человек!')">10–12 литров</span>
+                <span class="tag" style="background: rgba(255,255,255,0.2); cursor: pointer;" onclick="alert('Нет, это слишком много 😊')">50 литров</span>
+            </div>
+        </div>
+        
+    </div>
+</main>
+
+<!-- Футер -->
+<footer class="footer">
+    <div class="container">
+        <div>
+            <h3>🏺 Музей туризма</h3>
+            <p>Школа №1, кабинет 207<br>Часы работы: пн-пт 10:00–16:00</p>
+        </div>
+        <div>
+            <h3>Контакты</h3>
+            <p><i class="fas fa-envelope"></i> museum@school1.ru</p>
+            <p><i class="fab fa-vk"></i> vk.com/school1_museum</p>
+            <p><i class="fas fa-qrcode"></i> Сканируй QR-коды у экспонатов</p>
+        </div>
+        <div>
+            <h3>Экспонат предоставили</h3>
+            <p>Ученики 10А класса<br>Руководитель: И.А. Петрова<br>Реставрация: мастерская «Артефакт»</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Скрипты -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+    // Генерация QR-кода для текущей страницы
+    new QRCode(document.getElementById("qrCode"), {
+        text: window.location.href,
+        width: 100,
+        height: 100,
+        colorDark: "#E67E22",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.M
+    });
+    
+    // Интерактивные точки (hotspots)
+    const hotspots = document.querySelectorAll('.hotspot-card');
+    const detailDiv = document.getElementById('hotspotDetail');
+    
+    hotspots.forEach(hotspot => {
+        hotspot.addEventListener('click', function() {
+            // Убираем активный класс у всех
+            hotspots.forEach(h => h.classList.remove('active'));
+            // Добавляем текущему
+            this.classList.add('active');
+            
+            // Показываем детальную информацию
+            const title = this.querySelector('h4').innerText;
+            const description = this.querySelector('p').innerHTML;
+            
+            detailDiv.style.display = 'block';
+            detailDiv.innerHTML = `
+                <strong><i class="fas fa-info-circle"></i> ${title}</strong>
+                <p style="margin-top: 8px;">${description}</p>
+            `;
+            
+            // Прокручиваем к деталям
+            detailDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    });
+    
+    // Если нет реальной 3D-модели, показываем подсказку
+    const modelViewer = document.querySelector('model-viewer');
+    if (modelViewer) {
+        modelViewer.addEventListener('error', () => {
+            console.log('3D модель загружается...');
+        });
+    }
+</script>
+
+</body>
+</html>
