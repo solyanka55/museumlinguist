@@ -38,7 +38,7 @@ body {
     min-height: 100vh;
     background-image: url('img/back.jpg');
     background-repeat: no-repeat;
-    background-size: contain;  /*или cover  */
+    background-size: cover;  /*или cover  */
     background-position: center;
     display: flex;
     align-items: center;
